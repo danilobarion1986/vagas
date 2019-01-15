@@ -1,0 +1,107 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: alesaudate
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: bigint(20)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: level
+                  type: int(11)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: profession
+                  type: varchar(255)
+
+        - createTable:
+            tableName: opportunity
+            columns:
+              - column:
+                  name: id
+                  type: bigint(20)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: company
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: level
+                  type: int(11)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+                    
+        - createTable:
+            tableName: job_application
+            columns:
+              - column:
+                  name: id
+                  type: bigint(20)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: opportunity_id
+                  type: bigint(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: bigint(20)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: opportunity_id
+            baseTableName: job_application
+            referencedColumnNames: id
+            referencedTableName: opportunity
+            constraintName: fk_application_oportunity
+            
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: job_application
+            referencedColumnNames: id
+            referencedTableName: person
+            constraintName: fk_application_person
+            
+            

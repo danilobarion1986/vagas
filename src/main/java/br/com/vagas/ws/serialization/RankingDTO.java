@@ -9,15 +9,19 @@ public class RankingDTO {
     
     @JsonUnwrapped
     @JsonIgnoreProperties({"id"})
-    private Person person;
+    private PersonDTO person;
     
     @JsonProperty("score")
     private int score;
 
     
     public RankingDTO(Ranking ranking) {
-        this.person = ranking.getPerson();
+        this.person = new PersonDTO(ranking.getPerson());
+        this.person.mapCustomId();
+        
         this.score = ranking.getScore();
     }
+    
+    
     
 }

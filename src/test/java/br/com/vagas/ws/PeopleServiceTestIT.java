@@ -1,18 +1,19 @@
 package br.com.vagas.ws;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.*;
 
 import br.com.vagas.VagasApplication;
-import br.com.vagas.domain.Person;
 import io.restassured.RestAssured;
+import lombok.SneakyThrows;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
@@ -29,15 +30,11 @@ public class PeopleServiceTestIT {
     }
     
     @Test
+    @SneakyThrows
     public void testBasicInsert() {
         
-        Person person = new Person();
-        person.setLevel(5);
-        person.setLocation("A");
-        person.setName("Alexandre Saudate");
-        person.setProfession("IT Specialist");
         
-        given().body(person)
+        given().body(new ClassPathResource("/person.json").getFile())
             .header("Content-Type", "application/json")
             .post("/v1/pessoas")
             .then()
@@ -45,13 +42,24 @@ public class PeopleServiceTestIT {
             .and()
             .header("Location", is(String.format("http://localhost:%d/v1/pessoas/1", port)))
             .and()
-            .body("nome", is("Alexandre Saudate"))
-            .body("profissao", is("IT Specialist"))
-            .body("localizacao", is("A"))
-            .body("nivel", is(5))
+            .body("nome", is("John Doe"))
+            .body("profissao", is("Engenheiro de Software"))
+            .body("localizacao", is("C"))
+            .body("nivel", is(2))
             .body("id", is(1))
+            .body("_links.size()", greaterThanOrEqualTo(2))
             ;
             
+        given().get("/v1/pessoas/1")
+        .then()
+        .statusCode(200)
+        .and()
+        .body("nome", is("John Doe"))
+        .body("profissao", is("Engenheiro de Software"))
+        .body("localizacao", is("C"))
+        .body("nivel", is(2))
+        .body("id", is(1))
+        ;
         
     }
     

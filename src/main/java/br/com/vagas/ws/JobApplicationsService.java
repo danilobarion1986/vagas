@@ -5,6 +5,8 @@ import static br.com.vagas.ws.Services.API_VERSION;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,6 @@ import br.com.vagas.ws.serialization.JobApplicationDTO;
 
 @RestController()
 @RequestMapping(path={ API_VERSION + "/candidaturas"},
-    consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
     produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class JobApplicationsService {
 
@@ -24,7 +25,7 @@ public class JobApplicationsService {
     
     
     @PostMapping
-    public HttpEntity<JobApplicationDTO> createJobApplication(@RequestBody JobApplicationDTO dto) {
+    public HttpEntity<JobApplicationDTO> createJobApplication(@RequestBody @Valid JobApplicationDTO dto) {
         
         Long idOpportunity = dto.getIdOpportunity();
         Long idPerson = dto.getIdPerson();

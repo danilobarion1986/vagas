@@ -1,5 +1,7 @@
 package br.com.vagas.ws.serialization;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.*;
 
 import br.com.vagas.domain.JobApplication;
@@ -18,9 +20,11 @@ public class JobApplicationDTO extends CustomDTO<JobApplication>{
     
     
     @JsonProperty("id_vaga")
+    @NotNull
     private Long idOpportunity;
     
     @JsonProperty("id_pessoa")
+    @NotNull
     private Long idPerson;
     
     public JobApplicationDTO(JobApplication jobApplication) {

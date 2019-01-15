@@ -15,7 +15,6 @@ import br.com.vagas.ws.serialization.OpportunityDTO;
 
 @RestController()
 @RequestMapping(path={ API_VERSION + "/vagas"},
-    consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
     produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class OpportunitiesService {
     

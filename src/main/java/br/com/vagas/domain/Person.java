@@ -1,7 +1,7 @@
 package br.com.vagas.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,6 +30,8 @@ public class Person extends DomainEntity{
     String location;
     
     @JsonProperty("nivel")
+    @Min(1)
+    @Max(5)
     int level;
 
 }

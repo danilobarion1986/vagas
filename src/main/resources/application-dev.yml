@@ -1,3 +1,0 @@
-spring:
-  datasource:
-    url: jdbc://database:3306/vagas

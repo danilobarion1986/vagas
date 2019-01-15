@@ -26,9 +26,20 @@ public class JobApplicationsService {
     @PostMapping
     public HttpEntity<JobApplicationDTO> createJobApplication(@RequestBody JobApplicationDTO dto) {
         
-        JobApplication application = hrService.saveJobApplication(dto.getWrapped());
+        Long idOpportunity = dto.getIdOpportunity();
+        Long idPerson = dto.getIdPerson();
         
-        return Services.created(new JobApplicationDTO(application), getClass());
+        Optional<Opportunity> optionalOpportunity = hrService.findOpportunityById(idOpportunity);
+        Optional<Person> optionalPerson = hrService.findPersonById(idPerson);
+        
+        JobApplication jobApplication = new JobApplication();
+        jobApplication.setPerson(optionalPerson.orElseThrow(() -> new EntityNotFoundException()));
+        jobApplication.setOpportunity(optionalOpportunity.orElseThrow(() -> new EntityNotFoundException()));
+        
+        jobApplication = hrService.saveJobApplication(jobApplication);
+        dto = new JobApplicationDTO(jobApplication);
+        
+        return Services.created(dto, getClass());
         
     }        
     

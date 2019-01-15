@@ -16,7 +16,6 @@ import br.com.vagas.ws.serialization.PersonDTO;
 
 @RestController()
 @RequestMapping(path={ API_VERSION + "/pessoas"},
-    consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
     produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class PeopleService {
     

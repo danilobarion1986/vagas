@@ -11,8 +11,7 @@ public class RankingDTO {
     @JsonIgnoreProperties({"id"})
     private Person person;
     
-    //Suppressed because it will be mapped to/from JSON
-    @SuppressWarnings("unused")
+    @JsonProperty("score")
     private int score;
 
     

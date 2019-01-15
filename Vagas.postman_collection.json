@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Vagas",
+		"_postman_id": "cd17b9ae-24e1-ca4e-47ad-acbc53e0a3bd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar pessoa",
+			"request": {
+				"url": "http://localhost:9000/v1/pessoas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"John Doe\",\n    \"profissao\": \"Engenheiro de Software\",\n    \"localizacao\": \"C\",\n    \"nivel\": 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Listar pessoas",
+			"request": {
+				"url": "http://localhost:9000/v1/pessoas",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Listar pessoa específica",
+			"request": {
+				"url": "http://localhost:9000/v1/pessoas/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Criar vaga",
+			"request": {
+				"url": "http://localhost:9000/v1/vagas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"empresa\": \"Teste\",\n    \"titulo\": \"Vaga teste\",\n    \"descricao\": \"Criar os mais diferentes tipos de teste\",\n    \"localizacao\": \"A\",\n    \"nivel\": 3\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar candidatura",
+			"request": {
+				"url": "http://localhost:9000/v1/candidaturas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_vaga\": 1,\n    \"id_pessoa\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Listar candidatos ",
+			"request": {
+				"url": "http://localhost:9000/v1/vagas/1/candidaturas/ranking",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

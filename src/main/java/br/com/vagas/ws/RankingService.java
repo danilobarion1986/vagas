@@ -5,6 +5,7 @@ import static br.com.vagas.ws.Services.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +14,11 @@ import br.com.vagas.ws.serialization.RankingDTO;
 
 @RestController()
 @RequestMapping(path={ API_VERSION + "/vagas"},
-    consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
     produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class RankingService {
 
     
+    @Autowired
     private HRService hrService;
     
     

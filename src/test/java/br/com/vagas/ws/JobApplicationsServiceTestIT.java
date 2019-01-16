@@ -1,7 +1,7 @@
 package br.com.vagas.ws;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -9,6 +9,8 @@ import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,12 +22,14 @@ import lombok.SneakyThrows;
 @ActiveProfiles("test")
 @SpringBootTest(classes=VagasApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class JobApplicationsServiceTestIT {
 
     
     
     @LocalServerPort
     int port;
+    
 
     @Before
     public void setup() {
@@ -37,18 +41,21 @@ public class JobApplicationsServiceTestIT {
     @SneakyThrows
     public void testBasicInsert() {
         
+        
         given()
         .body(new ClassPathResource("/opportunity.json").getFile())
         .header("Content-Type", "application/json")
         .post("/v1/vagas")
         .then()
-        .statusCode(201);
+        .statusCode(201)
+        .header("Location", is(String.format("http://localhost:%d/v1/vagas/1", port)));
         
         given().body(new ClassPathResource("/person.json").getFile())
         .header("Content-Type", "application/json")
         .post("/v1/pessoas")
         .then()
-        .statusCode(201);
+        .statusCode(201)
+        .header("Location", is(String.format("http://localhost:%d/v1/pessoas/1", port)));
         
         given()
             .body(new ClassPathResource("/jobApplication.json").getFile())
@@ -62,12 +69,22 @@ public class JobApplicationsServiceTestIT {
     @Test()
     @SneakyThrows
     public void testRanking() {
+        testBasicInsert();
         
         given().body(new ClassPathResource("/maryJane.json").getFile())
         .header("Content-Type", "application/json")
         .post("/v1/pessoas")
         .then()
-        .statusCode(201);
+        .statusCode(201)
+        .header("Location", is(String.format("http://localhost:%d/v1/pessoas/2", port)));
+        
+        given()
+        .body(new ClassPathResource("/maryJaneApplication.json").getFile())
+        .header("Content-Type", "application/json")
+        .post("/v1/candidaturas")
+        .then()
+        .statusCode(201)
+        .header("Location", is(String.format("http://localhost:%d/v1/candidaturas/2", port)));
         
         
         given()

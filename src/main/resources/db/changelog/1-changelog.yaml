@@ -103,5 +103,8 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: person
             constraintName: fk_application_person
-            
+        - addUniqueConstraint:
+            columnNames: opportunity_id, person_id
+            tableName: job_application
+            constraintName: unq_opportunity_person            
             

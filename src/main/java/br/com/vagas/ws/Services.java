@@ -10,7 +10,7 @@ public class Services {
 
     public static final String API_VERSION = "v1";
     
-    protected static <T extends CustomDTO<?>> T wrap(T dto, Class<?> serviceClass) {
+    public static <T extends CustomDTO<?>> T wrap(T dto, Class<?> serviceClass) {
         
         dto.mapCustomId();
         dto.addCustomLinks(serviceClass);

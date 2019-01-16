@@ -9,8 +9,24 @@
 	"item": [
 		{
 			"name": "Criar pessoa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body contains name\"] = responseBody.has(\"John Doe\");",
+							"tests[\"Body contains title\"] = responseBody.has(\"Engenheiro de Software\");",
+							"tests[\"Body contains self link\"] = responseBody.has(\"self\");",
+							"",
+							"",
+							"tests[\"Location is present\"] = postman.getResponseHeader(\"Location\");"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://localhost:9000/v1/pessoas",
+				"url": "{{url}}/v1/pessoas",
 				"method": "POST",
 				"header": [
 					{
@@ -30,7 +46,7 @@
 		{
 			"name": "Listar pessoas",
 			"request": {
-				"url": "http://localhost:9000/v1/pessoas",
+				"url": "{{url}}/v1/pessoas",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -41,7 +57,7 @@
 		{
 			"name": "Listar pessoa específica",
 			"request": {
-				"url": "http://localhost:9000/v1/pessoas/1",
+				"url": "{{url}}/v1/pessoas/1",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -51,8 +67,24 @@
 		},
 		{
 			"name": "Criar vaga",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body contains opportunity name\"] = responseBody.has(\"Vaga teste\");",
+							"tests[\"Body contains level\"] = responseBody.has(\"nivel\");",
+							"tests[\"Body contains self link\"] = responseBody.has(\"self\");",
+							"",
+							"",
+							"tests[\"Location is present\"] = postman.getResponseHeader(\"Location\");"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://localhost:9000/v1/vagas",
+				"url": "{{url}}/v1/vagas",
 				"method": "POST",
 				"header": [
 					{
@@ -71,8 +103,19 @@
 		},
 		{
 			"name": "Registrar candidatura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Location is present\"] = postman.getResponseHeader(\"Location\");"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://localhost:9000/v1/candidaturas",
+				"url": "{{url}}/v1/candidaturas",
 				"method": "POST",
 				"header": [
 					{
@@ -92,7 +135,7 @@
 		{
 			"name": "Listar candidatos ",
 			"request": {
-				"url": "http://localhost:9000/v1/vagas/1/candidaturas/ranking",
+				"url": "{{url}}/v1/vagas/1/candidaturas/ranking",
 				"method": "GET",
 				"header": [],
 				"body": {},

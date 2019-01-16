@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.*;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.vagas.VagasApplication;
 import io.restassured.RestAssured;

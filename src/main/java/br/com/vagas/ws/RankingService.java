@@ -30,6 +30,7 @@ public class RankingService {
         
         return rankings.stream()
                 .map(r -> new RankingDTO(r))
+                .map(r -> r.prepare())
                 .collect(Collectors.toList());
         
     }

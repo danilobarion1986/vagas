@@ -10,7 +10,7 @@ public class CachingTSPEngine implements TSPEngine {
 
     private TSPEngine underlying;
 
-    private Map<Pair, Integer> cachingMap = new HashMap<>();
+    private Map<Pair, Integer> cachingMap;
     
     public CachingTSPEngine(TSPEngine underlying) {
         this.underlying = Optional.ofNullable(underlying)

@@ -17,23 +17,23 @@ import br.com.vagas.ws.serialization.RankingDTO;
     produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class RankingService {
 
-    
+
     @Autowired
     private HRService hrService;
-    
-    
+
+
     @GetMapping("/{id}/candidaturas/ranking")
     public List<RankingDTO> listRankings(@PathVariable("id")Long id) {
-        
+
         Opportunity opportunity = hrService.findOpportunityById(id).orElseThrow(() -> new EntityNotFoundException());
-        List<Ranking> rankings = hrService.calculateScores(opportunity);
-        
+        List<Ranking> rankings = hrService.listApplicationRankings(opportunity);
+
         return rankings.stream()
                 .map(r -> new RankingDTO(r))
                 .map(r -> r.prepare())
                 .collect(Collectors.toList());
-        
+
     }
-    
+
 
 }
